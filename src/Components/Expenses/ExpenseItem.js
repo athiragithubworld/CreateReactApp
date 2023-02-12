@@ -1,21 +1,36 @@
+import React , { useState  } from "react";  
+
 import ExpenseDetails from "./ExpenseDetails";
 import ExpenseDate from "./ExpenseDate";
 import "./ExpenseItem.css";
 
 const ExpenseItem = (props) => {
   // const expenseDate = new Date(2023, 23, 27);
+const [title,setTitle] = useState(props.title);
+
   const clickHandler = () => {
-    console.log('Clicked!!!!');
-  }
+    setTitle('Updated');
+    console.log(title);
+  };
+
+
+  const [amount,setAmount] = useState(props.amount);
+  const clickHandler2 = () => {
+    setAmount(100);
+    console.log(amount);
+  };
+
+
   return (
     <div className="expense-item">
       <ExpenseDate date={props.date}></ExpenseDate>{/* can write this way <ExpenseDate/> */}
       <ExpenseDetails
-          title={props.title}
+          title={title}
           LocationOfExpenditure={props.LocationOfExpenditure}
-          amount={props.amount}
+          amount={amount}
         ></ExpenseDetails>
-      <button onClick={clickHandler}>Delete Expense</button>
+      <button onClick={clickHandler}>change Title</button>
+      <button onClick={clickHandler2}>change Expense</button>
       {/* <h2>Expense Item!!</h2>
             <p>Expense Items</p>
             <p>Food Rs 10</p>
