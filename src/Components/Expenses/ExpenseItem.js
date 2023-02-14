@@ -1,34 +1,38 @@
-import React , { useState  } from "react";  
+import React, { useState } from "react";
+
 
 import ExpenseDetails from "./ExpenseDetails";
-import ExpenseDate from "./ExpenseDate";
+
 import "./ExpenseItem.css";
+// import Card from "../UI/Card";
 
 const ExpenseItem = (props) => {
   // const expenseDate = new Date(2023, 23, 27);
-const [title,setTitle] = useState(props.title);
-
+  const [title, setTitle] = useState(props.title);
+  
   const clickHandler = () => {
-    setTitle('Updated');
-    console.log(title);
+    setTitle("Updated");
+    
+    
   };
-
-
-  const [amount,setAmount] = useState(props.amount);
+  console.log(title);
+  const [amount, setAmount] = useState(props.amount);
   const clickHandler2 = () => {
     setAmount(100);
     console.log(amount);
   };
 
-
   return (
     <div className="expense-item">
-      <ExpenseDate date={props.date}></ExpenseDate>{/* can write this way <ExpenseDate/> */}
+      
+      {/* <ExpenseDate date={props.date}></ExpenseDate>  */}
+      {/* can write this way <ExpenseDate/> */}
       <ExpenseDetails
-          title={title}
-          LocationOfExpenditure={props.LocationOfExpenditure}
-          amount={amount}
-        ></ExpenseDetails>
+        date={props.date}
+        title={title}
+        LocationOfExpenditure={props.LocationOfExpenditure}
+        amount={amount}
+      ></ExpenseDetails>
       <button onClick={clickHandler}>change Title</button>
       <button onClick={clickHandler2}>change Expense</button>
       {/* <h2>Expense Item!!</h2>
@@ -38,5 +42,5 @@ const [title,setTitle] = useState(props.title);
             <p>Movies Rs 200</p> */}
     </div>
   );
-}
+};
 export default ExpenseItem;
