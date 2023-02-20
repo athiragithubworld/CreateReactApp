@@ -3,25 +3,79 @@ import React,{useState} from "react";
 import "./ExpenseForm.css";
 
 const ExpenseForm = () => {
-const [enteredtitle, setEnteredtitle] = useState('');
+
+//     // multiple state
+const [enteredtitle, setEnteredTitle] = useState('');
+const[enteredAmount,setEnteredAmount]=useState('');
+const[enteredDate,setEnteredDate] = useState('');
+
+// // Using one state instead of multiple state with the help of object
+
+// const [userInput , setUserInput] = useState({
+//     enteredTitle :'',
+//     enteredAmount:'',
+//     enteredDate :''
+// });
 
 const titleChangeHandler =(event) =>{
-    setEnteredtitle(event.target.value);
-}
+    setEnteredTitle(event.target.value);
 
-const[enteredAmount,setEnteredAmount]=useState('');
+// // setUserInput({
+// //     ...userInput ,
+// //     enteredTitle:event.target.value
+// // })
+
+// // to get previous values up to date
+// setUserInput((prevState) =>{
+//     return{ ...prevState , enteredTitle:event.target.value }
+// })
+
+}
 
 const amountChangeHandler =(event) =>{
     setEnteredAmount(event.target.value);
+//     // setUserInput({
+//     //     ...userInput ,
+//     //     enteredAmount:event.target.value
+//     // })
+
+//     // to get previous values up to date
+// setUserInput((prevState) =>{
+//     return{ ...prevState , enteredAmount:event.target.value }
+// })
 }
 
-const[enteredDate,setEnteredDate] = useState('');
+
 
 const dateChangeHandler =(event) =>{
     setEnteredDate(event.target.value);
+
+//     // setUserInput({
+//     //     ...userInput ,
+//     //     enteredDate:event.target.value
+//     // })
+
+//     // to get previous values up to date
+// setUserInput((prevState) =>{
+//     return{ ...prevState , enteredDate:event.target.value }
+// })
+
+
 }
+
+const submitHandler = (event) => {
+    event.preventDefault();
+
+    const expenseData = {
+        title : enteredtitle ,
+        amount :enteredAmount,
+        date:new Date(enteredDate)
+    }
+    
+    console.log(expenseData);
+  };
     return (
-        <form >
+        <form  onSubmit={submitHandler}>
             
             <h2>Add Expenses</h2>
             <div className="new-expense__controls">
@@ -39,7 +93,7 @@ const dateChangeHandler =(event) =>{
                 </div>
             </div>
             <div className="new-expense__action">
-                <button type="submit">Add Expense</button>
+                <button type="submit" >Add Expense</button>
             </div>
         </form>
         
