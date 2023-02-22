@@ -29,6 +29,8 @@ import NewExpense from "./Components/NewExpense/NewExpense";
 
 import ExpenseItem from "./Components/Expenses/ExpenseItem";
 
+import ExpensesFilter from "./Components/Expenses/ExpensesFilter";
+
 
 const Dummy_Expenses = [
   {
@@ -62,6 +64,12 @@ const Dummy_Expenses = [
 ];
 
 const  App =  (props) => {
+
+  const [filteredYear ,setFilteredYear] =useState('2020');
+
+  const filterChangeHandler = selectedYear =>{
+    setFilteredYear(selectedYear);
+  };
   
   const [expenses , setExpenses] = useState(Dummy_Expenses);
 
@@ -78,19 +86,26 @@ const  App =  (props) => {
 
   return (
     <div>
+
+
+
+      
       
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
+      <ExpensesFilter selected = {filteredYear} onChangeFilter ={filterChangeHandler}></ExpensesFilter>
+
       {
         
         expenses.map(expense => (
-          <div key={expense.id}>
+          // <div key={expense.id}>
             <ExpenseItem 
+              key ={expense.id}
               title={expense.title}
               amount={expense.amount}
               date={expense.date}
               LocationOfExpenditure={expense.LocationOfExpenditure}
             ></ExpenseItem>
-          </div>
+          // </div>
         ))
       }
 
