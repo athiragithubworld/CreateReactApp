@@ -69,6 +69,7 @@ const  App =  (props) => {
 
   const filterChangeHandler = selectedYear =>{
     setFilteredYear(selectedYear);
+    
   };
   
   const [expenses , setExpenses] = useState(Dummy_Expenses);
@@ -84,21 +85,23 @@ const  App =  (props) => {
     
   }
 
+  const filterExpense = expenses.filter(expense =>{
+      return expense.date.getFullYear().toString() === filteredYear;
+  });
+
   return (
     <div>
 
-
-
-      
-      
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
       <ExpensesFilter selected = {filteredYear} onChangeFilter ={filterChangeHandler}></ExpensesFilter>
 
       {
         
-        expenses.map(expense => (
+        filterExpense.map(expense => (
           // <div key={expense.id}>
+          
             <ExpenseItem 
+              
               key ={expense.id}
               title={expense.title}
               amount={expense.amount}
