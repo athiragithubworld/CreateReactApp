@@ -27,10 +27,11 @@ import React ,{useState} from "react";
 
 import NewExpense from "./Components/NewExpense/NewExpense";
 
-import ExpenseItem from "./Components/Expenses/ExpenseItem";
-
 import ExpensesFilter from "./Components/Expenses/ExpensesFilter";
 
+import ExpensesList from "./Components/Expenses/ExpensesList";
+
+//  import './ExpenseItem.css';
 
 const Dummy_Expenses = [
   {
@@ -86,21 +87,27 @@ const  App =  (props) => {
   }
 
   const filterExpense = expenses.filter(expense =>{
-      return expense.date.getFullYear().toString() === filteredYear;
-  });
+    return expense.date.getFullYear().toString() === filteredYear;
+});
+ 
+
 
   return (
     <div>
 
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
-      <ExpensesFilter selected = {filteredYear} onChangeFilter ={filterChangeHandler}></ExpensesFilter>
+      <ExpensesFilter 
+      selected = {filteredYear} 
+      onChangeFilter ={filterChangeHandler}
+      ></ExpensesFilter>
+      <ExpensesList expenses={filterExpense}></ExpensesList>
 
-      {
-        
-        filterExpense.map(expense => (
+      {/* {filterExpense.length === 0 && <p>No Expenses found.</p>} */}
+      {/* {filterExpense.length === 0 &&  } */}
+
+      {/* {filterExpense.length ===0 ? <p> No Expenses found.</p> : filterExpense.map(expense => (
           // <div key={expense.id}>
-          
-            <ExpenseItem 
+          <ExpenseItem 
               
               key ={expense.id}
               title={expense.title}
@@ -109,8 +116,8 @@ const  App =  (props) => {
               LocationOfExpenditure={expense.LocationOfExpenditure}
             ></ExpenseItem>
           // </div>
-        ))
-      }
+        )) } */}
+     
 
     </div>
   );
