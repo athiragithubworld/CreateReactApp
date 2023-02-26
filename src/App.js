@@ -23,13 +23,15 @@
 // }
 
 // export default App;
-import React ,{useState} from "react";
+import React, { useState } from "react";
 
 import NewExpense from "./Components/NewExpense/NewExpense";
 
 import ExpensesFilter from "./Components/Expenses/ExpensesFilter";
 
 import ExpensesList from "./Components/Expenses/ExpensesList";
+
+import ExpensesChart from "./Components/Expenses/ExpensesChart";
 
 //  import './ExpenseItem.css';
 
@@ -64,42 +66,39 @@ const Dummy_Expenses = [
   },
 ];
 
-const  App =  (props) => {
+const App = (props) => {
+  const [filteredYear, setFilteredYear] = useState("2020");
 
-  const [filteredYear ,setFilteredYear] =useState('2020');
-
-  const filterChangeHandler = selectedYear =>{
+  const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
-    
   };
-  
-  const [expenses , setExpenses] = useState(Dummy_Expenses);
 
-  const addExpenseHandler = expense => {
+  const [expenses, setExpenses] = useState(Dummy_Expenses);
+
+  const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => {
-      return[expense ,...prevExpenses];
+      return [expense, ...prevExpenses];
     });
-    
+
     // console.log('In App.js');
     // console.log(expense);
     // console.log(expense.title)
-    
-  }
+  };
 
-  const filterExpense = expenses.filter(expense =>{
+  const filterExpense = expenses.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
-});
- 
-
+  });
+  
 
   return (
     <div>
-
+      
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
-      <ExpensesFilter 
-      selected = {filteredYear} 
-      onChangeFilter ={filterChangeHandler}
+      <ExpensesFilter
+        selected={filteredYear}
+        onChangeFilter={filterChangeHandler}
       ></ExpensesFilter>
+      <ExpensesChart expenses={filterExpense}></ExpensesChart>
       <ExpensesList expenses={filterExpense}></ExpensesList>
 
       {/* {filterExpense.length === 0 && <p>No Expenses found.</p>} */}
@@ -117,10 +116,8 @@ const  App =  (props) => {
             ></ExpenseItem>
           // </div>
         )) } */}
-     
-
     </div>
   );
-}
+};
 
 export default App;
